@@ -1,2 +1,2 @@
 #!/bin/sh
-ENABLE_PRIMUS_LAYER=1 exec primusrun "$@"
+PRIMUS_VK_DISPLAYID=10de:128b PRIMUS_VK_RENDERID=10de:1c03 ENABLE_PRIMUS_LAYER=1 exec primusrun "$@"
