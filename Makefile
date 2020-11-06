@@ -12,7 +12,8 @@ sysconfdir    = $(PREFIX)/etc
 datarootdir   = ${PREFIX}/share
 datadir       = ${datarootdir}
 
-override CXXFLAGS += --std=gnu++11 -g3
+#override CXXFLAGS += --std=gnu++11 -g3
+override CXXFLAGS += --std=gnu++11 -g3 -m32 -DNV_DRIVER_PATH="/usr/lib32/libGLX_nvidia.so.0"
 
 all: libprimus_vk.so libnv_vulkan_wrapper.so
 
@@ -37,8 +38,10 @@ clean:
 	rm -f libnv_vulkan_wrapper.so libprimus_vk.so
 
 install: all
-	$(INSTALL) "libnv_vulkan_wrapper.so" "$(DESTDIR)$(libdir)/libnv_vulkan_wrapper.so.1"
-	$(INSTALL) "libprimus_vk.so"  "$(DESTDIR)$(libdir)/libprimus_vk.so.1"
+	#$(INSTALL) "libnv_vulkan_wrapper.so" "$(DESTDIR)$(libdir)/libnv_vulkan_wrapper.so.1"
+	$(INSTALL) "libnv_vulkan_wrapper.so" "$(DESTDIR)$(libdir)32/libnv_vulkan_wrapper.so.1"
+	#$(INSTALL) "libprimus_vk.so"  "$(DESTDIR)$(libdir)/libprimus_vk.so.1"
+	$(INSTALL) "libprimus_vk.so"  "$(DESTDIR)$(libdir)32/libprimus_vk.so.1"
 	$(INSTALL) -m644 "primus_vk.json" -t "$(DESTDIR)$(datadir)/vulkan/implicit_layer.d/"
 	$(INSTALL) -m644 "nv_vulkan_wrapper.json" -t "$(DESTDIR)$(datadir)/vulkan/icd.d/"
 	$(INSTALL) -m755 "pvkrun.in.sh" "$(DESTDIR)$(bindir)/pvkrun"
